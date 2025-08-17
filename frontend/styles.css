@@ -35,3 +35,13 @@ form button {
 #amount {
   width: 80px; /* 入力欄の横幅を80ピクセルに設定します */
 }
+
+#recipe-result ul li {
+  font-size: 1.2em; /* お好みで1.2em～1.5emなど調整できます */
+  margin-bottom: 12px;
+
+}
+.step-label {
+  font-size: 1.5em;
+  font-weight: bold;
+}
