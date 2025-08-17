@@ -77,4 +77,20 @@
 
 ---
 
-## Branch Rule
+## Development Rule
+
+### Branch Strategy
+- `main`: 本番用
+- `develop`: 開発用
+- `feature/xxxx`: 新機能開発
+- `fix/xxxx`: バグ修正
+
+### コミットメッセージ
+[コミット種別] 要約
+#### コミット種別
+- FIX：バグ修正
+- ADD：新規（ファイル）機能追加
+- UPDATE：機能修正（バグではない）
+- REMOVE：削除（ファイル）
+#### example
+[ADD] REDAME.md
