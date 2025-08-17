@@ -94,3 +94,24 @@
 - REMOVE：削除（ファイル）
 #### example
 [ADD] REDAME.md
+
+---
+
+## Directory Structure
+```
+develop/
+├─ frontend/               # HTML / JS / CSS
+│  ├─ index.html
+│  ├─ styles.css
+│  └─ app.js               # 入力→レシピ取得→表示
+│
+├─ backend/                # 簡易API（Google Apps Script / Airtable API）
+│  ├─ getRecipe.gs         # レシピ取得スクリプト
+│  └─ submitFeedback.gs    # フィードバック送信スクリプト
+│
+├─ data/                   # 初期データ（JSONやCSVなど）
+│  └─ recipes.json
+│
+├─ README.md
+└─ .gitignore
+```
