@@ -1,39 +1,39 @@
-async function getRecipe(userInput) {
-    /**
-     * userInput = {
-     *      beans: "dark",
-     *      taste: "bitter",
-     *      temperture: "hot",
-     *      amount: 200
-     * }
-     */
-    try {
-        // get recipe.json
-        const response = await fetch('data/recipe.json');
-        const recipes = await response.json();
-        
-        // userInputに一致するレシピをフィルタ
-        const filtered = recipes.filter(recipe => 
-            recipe.beans === userInput.beans &&
-            recipe.taste === userInput.taste &&
-            recipe.temperature === userInput.temperature
-        );
-        if (filtered.length === 0) {
-            return null;
-        }
+const express = require('express');
+const router = express.Router();
+const recipes = require('../data/recipes.json');
 
-        // 量に応じて水の量を調整
-        const recipe = JSON.parse(JSON.stringify(filtered[0]));
-        const factor = userInput.amount / recipe.amount;
-        recipe.steps.forEach(step => {
-            step.water = Math.round(step.water * factor);
-        });
-        recipe.amount = userInput.amount;
-
-        return recipe;
-
-    } catch (error) {
-        console.error("Error: get recipe", error);
-        return null;
+router.get('/', (req, res) => {
+    const { beans, taste, temperature, amount} = req.query;
+    
+    if (!beans || !taste || !temperature || !amount || isNaN(Number(amount))) {
+        return res.status(400).json({ error: 'Missing Parameter' });
     }
-}
+
+    const numAmount = Number(amount);
+    const recipe = recipes.find(r =>
+        r.beans === beans &&
+        r.taste === taste &&
+        r.temperature === temperature &&
+        Number(r.amount) === numAmount
+    );
+
+    if (!recipe) {
+        return res.status(404).json({ error: 'No matching recipes found' })
+    }
+
+    const factor = numAmount / recipe.amount;
+    const adjustedRecipe = JSON.parse(JSON.stringify(recipe)); //copy of recipe
+
+    if (Array.isArray(adjustedRecipe.steps)) {
+           adjustedRecipe.steps.forEach(step => {
+            if (typeof step.water === 'number') {
+                step.water = Math.round(step.water * factor);
+            }
+       });
+    }
+    adjustedRecipe.amount = numAmount; //userのamountに変更
+
+    res.json(adjustedRecipe);
+});
+
+module.exports = router;

@@ -1,86 +1,47 @@
-// getRecipe.test.js
-import { jest } from '@jest/globals';
-import fs from 'fs';
-import path from 'path';
+const request = require('supertest');
+const express = require('express');
+const getRecipeRoute = require('../routes/getRecipe');
 
-// getRecipe関数のインポート例
-import { getRecipe } from '../routes/getRecipe.js';
+const app = express();
+app.use(express.json());
+app.use('/api/getRecipe', getRecipeRoute);
 
-// モック用のrecipes.json
-const recipesMock = [
-    {
-        "id": 1,
-        "name": "深煎りホットコーヒー（200g）",
-        "beans": "dark",
-        "amount": 200,
-        "taste": "bitter",
-        "temperature": "ホット",
-        "steps": [
-            { "step": 1, "water": 40, "duration_sec": 30 },
-            { "step": 2, "water": 30, "duration_sec": 30 }
-        ]
-    },
-    {
-        "id": 2,
-        "name": "浅煎りホットコーヒー（200g）",
-        "beans": "light",
-        "amount": 200,
-        "taste": "sweet",
-        "temperature": "ホット",
-        "steps": [
-            { "step": 1, "water": 40, "duration_sec": 30 },
-            { "step": 2, "water": 120, "duration_sec": 50 }
-        ]
-    }
-];
-
-// fetch をモック
-global.fetch = jest.fn(() =>
-    Promise.resolve({
-        json: () => Promise.resolve(recipesMock)
-    })
-);
-
-describe('getRecipe', () => {
-    test('条件に合うレシピを取得できる', async () => {
-        const userInput = {
-            beans: "dark",
-            taste: "bitter",
-            temperature: "ホット",
-            amount: 200
-        };
-
-        const recipe = await getRecipe(userInput);
-
-        expect(recipe).not.toBeNull();
-        expect(recipe.name).toBe("深煎りホットコーヒー（200g）");
-        expect(recipe.amount).toBe(200);
-        expect(recipe.steps.length).toBe(2);
-        expect(recipe.steps[0].water).toBe(40);
+describe('GET /api/getRecipe', () => {
+    it('should return a recipe for valid parameters', async () => {
+        const res = await request(app)
+            .get('/api/getRecipe')
+            .query({
+                beans: 'dark',
+                taste: 'bitter',
+                temperature: 'hot',
+                amount: 200
+            });
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toHaveProperty('beans', 'dark');
+        expect(res.body).toHaveProperty('taste', 'bitter');
+        expect(res.body).toHaveProperty('temperature', 'hot');
+        expect(res.body).toHaveProperty('amount', 200);
+        expect(Array.isArray(res.body.steps)).toBe(true);
     });
 
-    test('量に応じて水量が調整される', async () => {
-        const userInput = {
-            beans: "dark",
-            taste: "bitter",
-            temperature: "ホット",
-            amount: 400
-        };
-
-        const recipe = await getRecipe(userInput);
-        expect(recipe.steps[0].water).toBe(80); // 40 * 400/200
-        expect(recipe.steps[1].water).toBe(60); // 30 * 400/200
+    it('should return 400 if missing parameters', async () => {
+        const res = await request(app)
+            .get('/api/getRecipe')
+            .query({ beans: 'dark' });
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty('error');
     });
 
-    test('条件に合わない場合は null を返す', async () => {
-        const userInput = {
-            beans: "medium",
-            taste: "bitter",
-            temperature: "ホット",
-            amount: 200
-        };
-
-        const recipe = await getRecipe(userInput);
-        expect(recipe).toBeNull();
+    it('should return 404 if no matching recipe', async () => {
+        const res = await request(app)
+            .get('/api/getRecipe')
+            .query({
+                beans: 'unknown',
+                taste: 'bitter',
+                temperature: 'hot',
+                amount: 999
+            });
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty('error');
     });
 });
