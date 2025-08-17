@@ -99,19 +99,22 @@
 
 ## Directory Structure
 ```
-develop/
-├─ frontend/               # HTML / JS / CSS
-│  ├─ index.html
-│  ├─ styles.css
-│  └─ app.js               # 入力→レシピ取得→表示
+drip-coffee-recipe-app/
+├─ frontend/                      # ユーザーが操作する画面（HTML・CSS・JS）
+│  ├─ index.html                  # 入力フォームと結果表示のページ
+│  ├─ styles.css                  # 画面の見た目を整えるスタイル
+│  └─ app.js                      # 入力内容をAPIに送り、結果を表示するスクリプト
 │
-├─ backend/                # 簡易API（Google Apps Script / Airtable API）
-│  ├─ getRecipe.gs         # レシピ取得スクリプト
-│  └─ submitFeedback.gs    # フィードバック送信スクリプト
+├─ backend/                       # レシピAPIやフィードバックAPIなどサーバー側
+│  ├─ server.js                   # サーバーの起動・APIのルーティング
+│  ├─ data/
+│  │   └─ recipes.json            # レシピデータ（JSON形式）
+│  ├─ routes/
+│  │   ├─ getRecipe.js            # レシピ取得APIの処理
+│  │   └─ submitFeedback.js       # フィードバック送信APIの処理
+│  └─ test/
+│      └─ getRecipe.test.js       # レシピ取得APIのテストコード
 │
-├─ data/                   # 初期データ（JSONやCSVなど）
-│  └─ recipes.json
-│
-├─ README.md
-└─ .gitignore
+├─ README.md                      # プロジェクトの説明・使い方
+└─ .gitignore                     # Git管理から除外するファイル一覧
 ```

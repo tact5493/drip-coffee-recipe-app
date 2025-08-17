@@ -1,0 +1,37 @@
+form label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* フォーム内のボタンを中央に配置します */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 子要素（ボタンなど）を中央に寄せます */
+}
+
+form label {
+  display: block;
+  margin-bottom: 16px;
+  text-align: center; /* テキストを中央揃えにします */
+}
+
+/* 全体の文字サイズを大きくします */
+body {
+  font-size: 1.0em; /* 基本の文字サイズを大きくします */
+}
+
+h1 {
+  font-size: 2em; /* タイトルをさらに大きくします */
+}
+
+form label,
+form select,
+form input,
+form button {
+  font-size: 1.1em; /* フォームの各要素も大きくします */
+}
+
+#amount {
+  width: 80px; /* 入力欄の横幅を80ピクセルに設定します */
+}
