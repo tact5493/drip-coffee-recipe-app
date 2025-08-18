@@ -46,33 +46,33 @@ document.getElementById("recipe-form").addEventListener("submit", async (e) => {
         totalTime += Number(step.duration_sec);
         totalTimeMin = Math.floor(totalTime / 60);
         totalTimeSec = totalTime % 60;
-        li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water input-${step.water}ml, total-${totalAmount}ml<br />Time ${totalTimeMin}m ${totalTimeSec}s`;
+        li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water input-${step.water}ml (total-${totalAmount}ml)<br />Time ${totalTimeMin}m ${totalTimeSec}s`;
         ul.appendChild(li);
     });
     resultDiv.appendChild(ul);
 
-    async function showSteps(steps) {
-      for (let i = 0; i < steps.length; i++) {
-        const step = steps[i];
-        totalAmount += Number(step.water);
-        totalTime += Number(step.duration_sec);
-        const totalTimeMin = Math.floor(totalTime / 60);
-        const totalTimeSec = totalTime % 60;
+    // async function showSteps(steps) {
+    //   for (let i = 0; i < steps.length; i++) {
+    //     const step = steps[i];
+    //     totalAmount += Number(step.water);
+    //     totalTime += Number(step.duration_sec);
+    //     const totalTimeMin = Math.floor(totalTime / 60);
+    //     const totalTimeSec = totalTime % 60;
 
-        // liタグ生成
-        const li = document.createElement("li");
-        li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water input-${step.water}ml, total-${totalAmount}ml<br />Time ${totalTimeMin}m ${totalTimeSec}s`;
-        ul.appendChild(li);
+    //     // liタグ生成
+    //     const li = document.createElement("li");
+    //     li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water input-${step.water}ml, total-${totalAmount}ml<br />Time ${totalTimeMin}m ${totalTimeSec}s`;
+    //     ul.appendChild(li);
 
-        // Step1は即時表示、2ステップ目以降は前ステップのduration_sec秒待機
-        if (i < steps.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, step.duration_sec * 1000));
-        }
-      }
-    }
+    //     // Step1は即時表示、2ステップ目以降は前ステップのduration_sec秒待機
+    //     if (i < steps.length - 1) {
+    //       await new Promise(resolve => setTimeout(resolve, step.duration_sec * 1000));
+    //     }
+    //   }
+    // }
 
-    // ステップ表示開始
-    await showSteps(recipe.steps);
+    // // ステップ表示開始
+    // await showSteps(recipe.steps);
     
     
   } catch (error) {
