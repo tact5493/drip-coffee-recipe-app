@@ -46,7 +46,7 @@ document.getElementById("recipe-form").addEventListener("submit", async (e) => {
         totalTime += Number(step.duration_sec);
         totalTimeMin = Math.floor(totalTime / 60);
         totalTimeSec = totalTime % 60;
-        li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water input-${step.water}ml (total-${totalAmount}ml)<br />Time ${totalTimeMin}m ${totalTimeSec}s`;
+        li.innerHTML = `<span class="step-label">Step${step.step}:</span><br />Water: input ${step.water}ml (total ${totalAmount}ml)<br />Time: ${totalTimeMin}m ${totalTimeSec}s`;
         ul.appendChild(li);
     });
     resultDiv.appendChild(ul);
