@@ -1,30 +1,30 @@
 [
     {
         "id": 1,
-        "name": "深煎りホットコーヒー（200g）",
+        "name": "深煎りホットコーヒー（300ml）",
         "beans": "dark",
-        "amount": 200,
+        "amount": 300,
         "taste": "bitter",
         "temperature": "hot",
         "steps": [
             { "step": 1, "water": 40, "duration_sec": 30 },
-            { "step": 2, "water": 30, "duration_sec": 30 },
-            { "step": 3, "water": 30, "duration_sec": 30 },
-            { "step": 4, "water": 30, "duration_sec": 30 },
-            { "step": 5, "water": 30, "duration_sec": 30 }
+            { "step": 2, "water": 80, "duration_sec": 30 },
+            { "step": 3, "water": 60, "duration_sec": 30 },
+            { "step": 4, "water": 60, "duration_sec": 30 },
+            { "step": 5, "water": 60, "duration_sec": 30 }
         ]
     },
     {
         "id": 2,
-        "name": "浅煎りホットコーヒー（200g）",
+        "name": "浅煎りホットコーヒー（300ml）",
         "beans": "light",
-        "amount": 200,
+        "amount": 300,
         "taste": "sweet",
         "temperature": "hot",
         "steps": [
             { "step": 1, "water": 40, "duration_sec": 30 },
             { "step": 2, "water": 120, "duration_sec": 50 },
-            { "step": 3, "water": 150, "duration_sec": 50 }
+            { "step": 3, "water": 140, "duration_sec": 50 }
         ]
     }
 ]
