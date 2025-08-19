@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "深煎りホットコーヒー（300ml）",
+        "name": "深煎りホットコーヒー",
         "beans": "dark",
         "amount": 300,
         "taste": "bitter",
@@ -16,7 +16,7 @@
     },
     {
         "id": 2,
-        "name": "浅煎りホットコーヒー（300ml）",
+        "name": "浅煎りホットコーヒー",
         "beans": "light",
         "amount": 300,
         "taste": "sweet",
