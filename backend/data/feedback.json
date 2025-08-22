@@ -1,9 +1,1 @@
-[
-    {
-        "recipeId": 1,
-        "feedback": [
-            {"comment": "good", "rating": 4, "time": "2025-08-22T12:10:45"}, 
-            {"comment": "very good", "rating": 5, "date": "2025-08-22T12:10:49"}
-        ]
-    }
-]
+[{"recipeId":99,"feedback":[{"comment":"first","rating":4,"time":"2025-08-23T11:00:00"}]}]
