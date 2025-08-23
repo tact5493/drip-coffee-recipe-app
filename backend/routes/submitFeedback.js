@@ -16,13 +16,19 @@ router.post('/', (req, res) => {
     try {
         let feedbacks = [];
         if (fs.existsSync(feedbackPath, 'utf-8')) {
+            const data = fs.readFileSync(feedbackPath, 'utf-8');
             feedbacks = JSON.parse(data);
         }
 
-        feedbacks.push({
-            recipeId,
-            feedback
-        });
+        const target = feedbacks.find(f => f.recipeId === recipeId)
+        if (target) {
+            target.feedback.push(feedback);
+        } else {
+            feedbacks.push({
+                recipeId,
+                feedback
+            });
+        }
         fs.writeFileSync(feedbackPath, JSON.stringify(feedbacks, null, 2));
         res.json({ message: 'Feedback saved successfully!' });
 

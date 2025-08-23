@@ -21,7 +21,9 @@ describe('POST /', () => {
             .post('/')
             .send({
                 recipeId: 99,
-                feedback: { comment: 'test', rating: 5, time: '2025-08-23T12:00:00' }
+                feedback: [
+                    { comment: 'test', rating: 5, time: '2025-08-23T12:00:00' }
+                ]
             });
         expect(res.statusCode).toBe(200);
 
