@@ -4,6 +4,7 @@
         "name": "深煎りホットコーヒー",
         "beans": "dark",
         "amount": 300,
+        "beans_amount": 20,
         "taste": "bitter",
         "temperature": "hot",
         "steps": [
@@ -18,6 +19,7 @@
         "id": 2,
         "name": "浅煎りホットコーヒー",
         "beans": "light",
+        "beans_amount": 20,
         "amount": 300,
         "taste": "sweet",
         "temperature": "hot",

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const recipes = require('../data/recipes.json');
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     const { beans, taste, temperature, amount} = req.query;
     
     if (!beans || !taste || !temperature || !amount || isNaN(Number(amount))) {
@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
        });
     }
     adjustedRecipe.amount = numAmount; //userのamountに変更
+    adjustedRecipe.beans_amount = Math.round(recipe.beans_amount * factor * 10) / 10;
 
     res.json(adjustedRecipe);
 });
