@@ -2,7 +2,8 @@
     {
         "id": 1,
         "name": "深煎りホットコーヒー",
-        "beans": "dark",
+        "roast": "dark",
+        "amount_beans": 20,
         "amount": 300,
         "taste": "bitter",
         "temperature": "hot",
@@ -17,7 +18,8 @@
     {
         "id": 2,
         "name": "浅煎りホットコーヒー",
-        "beans": "light",
+        "roast": "light",
+        "amount_beans": 20,
         "amount": 300,
         "taste": "sweet",
         "temperature": "hot",
